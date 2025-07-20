@@ -20,7 +20,7 @@ export default function RootLayout({
         <SupabaseStatusBadge refreshOnDashboard />
         <Header />
         {children}
-        {process.env.NODE_ENV === 'development' && <VersionBadge />}
+        <VersionBadge />
       </body>
     </html>
   )
