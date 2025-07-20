@@ -162,6 +162,7 @@ export default function EditRecipePage() {
           placeholder="Description"
           value={form.description}
           onChange={handleChange}
+          rows={6}
           required
         />
         <div>
@@ -169,7 +170,7 @@ export default function EditRecipePage() {
           {form.ingredients.map((ing, idx) => (
             <div key={idx} className="flex gap-2 mb-2">
               <input
-                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
+                className="flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
                 type="text"
                 value={ing}
                 onChange={e => handleIngredientChange(idx, e.target.value)}
@@ -179,7 +180,7 @@ export default function EditRecipePage() {
                 <button
                   type="button"
                   onClick={() => removeIngredient(idx)}
-                  className="text-red-500 hover:text-red-700 p-2 transition-colors"
+                  className="text-red-500 hover:text-red-700 p-2 transition-colors flex-shrink-0"
                   title="Remove ingredient"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -196,7 +197,7 @@ export default function EditRecipePage() {
           {form.instructions.map((ins, idx) => (
             <div key={idx} className="flex gap-2 mb-2">
               <input
-                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
+                className="flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
                 type="text"
                 value={ins}
                 onChange={e => handleInstructionChange(idx, e.target.value)}
@@ -206,7 +207,7 @@ export default function EditRecipePage() {
                 <button
                   type="button"
                   onClick={() => removeInstruction(idx)}
-                  className="text-red-500 hover:text-red-700 p-2 transition-colors"
+                  className="text-red-500 hover:text-red-700 p-2 transition-colors flex-shrink-0"
                   title="Remove instruction"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
