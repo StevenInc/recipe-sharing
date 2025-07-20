@@ -145,7 +145,7 @@ export default function FavoritesPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 py-12 px-4">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">My Favorite Recipes</h1>
+          <h1 className="text-3xl font-bold mb-8 text-gray-900">My Favorite Recipes</h1>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[...Array(6)].map((_, i) => (
               <div key={i} className="bg-white rounded-lg shadow-md p-6 animate-pulse">
@@ -165,7 +165,7 @@ export default function FavoritesPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 py-12 px-4">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">My Favorite Recipes</h1>
+          <h1 className="text-3xl font-bold mb-8 text-gray-900">My Favorite Recipes</h1>
           <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700">
             {error}
           </div>
@@ -177,7 +177,7 @@ export default function FavoritesPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-200 py-12 px-4">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">My Favorite Recipes</h1>
+        <h1 className="text-3xl font-bold mb-8 text-gray-900">My Favorite Recipes</h1>
 
         {favoriteRecipes.length === 0 ? (
           <div className="text-center py-12">
@@ -203,7 +203,7 @@ export default function FavoritesPage() {
                     placeholder="Search your favorite recipes..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-900 placeholder-gray-500"
                   />
                 </div>
 
@@ -212,7 +212,7 @@ export default function FavoritesPage() {
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white text-gray-900"
                   >
                     {CATEGORIES.map((cat) => (
                       <option key={cat} value={cat}>

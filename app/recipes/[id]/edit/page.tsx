@@ -146,9 +146,9 @@ export default function EditRecipePage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-200 py-12 px-4">
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow max-w-lg w-full space-y-4">
-        <h2 className="text-2xl font-bold text-center mb-2">Edit Recipe</h2>
+        <h2 className="text-2xl font-bold text-center mb-2 text-gray-900">Edit Recipe</h2>
         <input
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
           type="text"
           name="title"
           placeholder="Title"
@@ -157,7 +157,7 @@ export default function EditRecipePage() {
           required
         />
         <textarea
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
           name="description"
           placeholder="Description"
           value={form.description}
@@ -165,45 +165,63 @@ export default function EditRecipePage() {
           required
         />
         <div>
-          <label className="block font-semibold mb-1">Ingredients</label>
+          <label className="block font-semibold mb-1 text-gray-900">Ingredients</label>
           {form.ingredients.map((ing, idx) => (
             <div key={idx} className="flex gap-2 mb-2">
               <input
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
                 type="text"
                 value={ing}
                 onChange={e => handleIngredientChange(idx, e.target.value)}
                 required
               />
               {form.ingredients.length > 1 && (
-                <button type="button" onClick={() => removeIngredient(idx)} className="text-red-500">Remove</button>
+                <button
+                  type="button"
+                  onClick={() => removeIngredient(idx)}
+                  className="text-red-500 hover:text-red-700 p-2 transition-colors"
+                  title="Remove ingredient"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
               )}
             </div>
           ))}
           <button type="button" onClick={addIngredient} className="text-blue-600 underline">Add Ingredient</button>
         </div>
         <div>
-          <label className="block font-semibold mb-1">Instructions</label>
+          <label className="block font-semibold mb-1 text-gray-900">Instructions</label>
           {form.instructions.map((ins, idx) => (
             <div key={idx} className="flex gap-2 mb-2">
               <input
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
                 type="text"
                 value={ins}
                 onChange={e => handleInstructionChange(idx, e.target.value)}
                 required
               />
               {form.instructions.length > 1 && (
-                <button type="button" onClick={() => removeInstruction(idx)} className="text-red-500">Remove</button>
+                <button
+                  type="button"
+                  onClick={() => removeInstruction(idx)}
+                  className="text-red-500 hover:text-red-700 p-2 transition-colors"
+                  title="Remove instruction"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
               )}
             </div>
           ))}
           <button type="button" onClick={addInstruction} className="text-blue-600 underline">Add Instruction</button>
         </div>
         <div>
-          <label className="block font-semibold mb-1">Category</label>
+          <label className="block font-semibold mb-1 text-gray-900">Category</label>
           <select
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900"
             name="category"
             value={form.category}
             onChange={handleChange}
@@ -215,10 +233,10 @@ export default function EditRecipePage() {
           </select>
         </div>
         <div>
-          <label className="block font-semibold mb-1">Image (optional)</label>
+          <label className="block font-semibold mb-1 text-gray-900">Image (optional)</label>
           <input
             ref={imageInputRef}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900"
             type="file"
             accept="image/*"
             onChange={e => setImageFile(e.target.files?.[0] || null)}

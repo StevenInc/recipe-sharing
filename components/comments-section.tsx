@@ -142,7 +142,7 @@ export default function CommentsSection({ recipeId }: CommentsSectionProps) {
   return (
     <div className="mt-8 border-t pt-6">
       <div className="mb-4">
-        <h3 className="text-xl font-semibold">Comments ({comments.length})</h3>
+        <h3 className="text-xl font-semibold text-gray-900">Comments ({comments.length})</h3>
       </div>
 
       {/* New Comment Form */}
@@ -152,7 +152,7 @@ export default function CommentsSection({ recipeId }: CommentsSectionProps) {
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
             placeholder="Add a comment..."
-            className="w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            className="w-full p-3 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-900 placeholder-gray-500"
             rows={3}
             disabled={submitting}
           />

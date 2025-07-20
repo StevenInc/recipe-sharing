@@ -41,8 +41,8 @@ export default async function RecipeDetailPage({ params }: RecipeDetailPageProps
             className="w-full h-64 object-cover rounded mb-6"
           />
         )}
-        <h1 className="text-3xl font-bold mb-2">{recipe.title}</h1>
-        <div className="text-sm text-gray-500 mb-2">
+        <h1 className="text-3xl font-bold mb-2 text-gray-900">{recipe.title}</h1>
+        <div className="text-sm text-gray-600 mb-2">
           {recipe.category} &middot; {new Date(recipe.created_at).toLocaleDateString()}
           {uploader && (
             <>
@@ -53,7 +53,7 @@ export default async function RecipeDetailPage({ params }: RecipeDetailPageProps
         <div className="text-lg text-gray-700 mb-4">{recipe.description}</div>
         <LikeButton recipeId={recipe.id} />
         <div className="mb-4">
-          <h2 className="font-semibold mb-1">Ingredients</h2>
+          <h2 className="font-semibold mb-1 text-gray-900">Ingredients</h2>
           <ul className="list-disc list-inside text-gray-800">
             {recipe.ingredients.map((ing: string, idx: number) => (
               <li key={idx}>{ing}</li>
@@ -61,7 +61,7 @@ export default async function RecipeDetailPage({ params }: RecipeDetailPageProps
           </ul>
         </div>
         <div className="mb-4">
-          <h2 className="font-semibold mb-1">Instructions</h2>
+          <h2 className="font-semibold mb-1 text-gray-900">Instructions</h2>
           <ol className="list-decimal list-inside text-gray-800">
             {recipe.instructions.map((ins: string, idx: number) => (
               <li key={idx}>{ins}</li>
