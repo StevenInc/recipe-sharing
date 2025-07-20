@@ -76,9 +76,9 @@ function LoginForm() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-200">
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow max-w-sm w-full space-y-4">
-        <h2 className="text-2xl font-bold text-center mb-2">{mode === 'signin' ? 'Sign In' : 'Sign Up'}</h2>
+        <h2 className="text-2xl font-bold text-center mb-2 text-gray-900">{mode === 'signin' ? 'Sign In' : 'Sign Up'}</h2>
         <input
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
           type="email"
           placeholder="Email"
           value={email}
@@ -86,7 +86,7 @@ function LoginForm() {
           required
         />
         <input
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
           type="password"
           placeholder="Password"
           value={password}
@@ -96,7 +96,7 @@ function LoginForm() {
         {mode === 'signup' && (
           <>
             <input
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
               type="text"
               placeholder="Username"
               value={username}
@@ -104,7 +104,7 @@ function LoginForm() {
               required
             />
             <input
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
               type="text"
               placeholder="Full Name"
               value={fullName}
@@ -121,13 +121,13 @@ function LoginForm() {
         >
           {loading ? 'Loading…' : mode === 'signin' ? 'Sign In' : 'Sign Up'}
         </button>
-        <div className="text-center text-sm mt-2">
+        <div className="text-center text-sm mt-2 text-gray-700">
           {mode === 'signin' ? (
             <span>
               No account?{' '}
               <button
                 type="button"
-                className="underline"
+                className="underline text-orange-600 hover:text-orange-700"
                 onClick={() => router.push('/login?mode=signup')}
               >
                 Sign Up
@@ -138,7 +138,7 @@ function LoginForm() {
               Already have an account?{' '}
               <button
                 type="button"
-                className="underline"
+                className="underline text-orange-600 hover:text-orange-700"
                 onClick={() => router.push('/login')}
               >
                 Sign In

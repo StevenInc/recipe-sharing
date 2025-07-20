@@ -95,13 +95,13 @@ export default function EditRecipePage() {
   const handleDragStart = (e: React.DragEvent, type: 'ingredient' | 'instruction', index: number) => {
     setDraggedItem({ type, index });
     e.dataTransfer.effectAllowed = 'move';
-    e.currentTarget.style.opacity = '0.5';
+    (e.currentTarget as HTMLElement).style.opacity = '0.5';
   };
 
   const handleDragEnd = (e: React.DragEvent) => {
     setDraggedItem(null);
     setDragOverIndex(null);
-    e.currentTarget.style.opacity = '1';
+    (e.currentTarget as HTMLElement).style.opacity = '1';
   };
 
   const handleDragOver = (e: React.DragEvent, index: number) => {
