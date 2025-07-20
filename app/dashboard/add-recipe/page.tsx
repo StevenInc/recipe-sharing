@@ -93,6 +93,8 @@ export default function AddRecipePage() {
     router.replace('/dashboard');
   };
 
+  //allow for the camera.
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-200 py-12 px-4">
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow max-w-lg w-full space-y-4">
@@ -163,6 +165,7 @@ export default function AddRecipePage() {
         </div>
         <div>
           <label className="block font-semibold mb-1">Image (optional)</label>
+
           <input
             ref={imageInputRef}
             className="w-full p-2 border rounded"
