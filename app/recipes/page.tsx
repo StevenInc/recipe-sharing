@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import type { Recipe } from '@/lib/types/database';
 
-export default function RecipesPage() {
+function RecipesContent() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -60,7 +60,7 @@ export default function RecipesPage() {
           }));
           setRecipes(recipes);
         }
-      } catch (err) {
+      } catch {
         setError('Failed to load recipes');
       } finally {
         setLoading(false);
@@ -236,5 +236,17 @@ export default function RecipesPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function RecipesPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-lg">Loading recipes...</div>
+      </div>
+    }>
+      <RecipesContent />
+    </Suspense>
   );
 }

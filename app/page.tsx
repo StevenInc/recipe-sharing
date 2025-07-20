@@ -1,23 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import SupabaseStatusBadge from '@/components/supabase-status-badge';
-import { createClient } from '@/lib/supabase/client';
 
 export default function HomePage() {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
-  const supabase = createClient();
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setIsAuthenticated(!!user);
-    };
-    checkAuth();
-  }, [supabase.auth]);
 
   const handleBrowseRecipes = () => {
     router.push('/recipes');
