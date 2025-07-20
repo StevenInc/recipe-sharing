@@ -24,28 +24,28 @@ export default function HomePage() {
         <section className="w-full max-w-3xl grid gap-8 md:grid-cols-2 mb-16">
           <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center">
             <span className="text-3xl mb-2">🔐</span>
-            <h2 className="font-bold text-lg mb-1">Authentication</h2>
+            <h2 className="font-bold text-lg mb-1 text-gray-900">Authentication</h2>
             <p className="text-gray-600 text-center text-sm">
               Sign up, log in, and manage your profile securely with Supabase authentication.
             </p>
           </div>
           <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center">
             <span className="text-3xl mb-2">🍲</span>
-            <h2 className="font-bold text-lg mb-1">Recipe Management</h2>
+            <h2 className="font-bold text-lg mb-1 text-gray-900">Recipe Management</h2>
             <p className="text-gray-600 text-center text-sm">
               Upload, edit, and delete your own recipes with images, ingredients, and steps.
             </p>
           </div>
           <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center">
             <span className="text-3xl mb-2">🔎</span>
-            <h2 className="font-bold text-lg mb-1">Browse & Search</h2>
+            <h2 className="font-bold text-lg mb-1 text-gray-900">Browse & Search</h2>
             <p className="text-gray-600 text-center text-sm">
               Find recipes by title, ingredient, category, or prep time. See trending and recent recipes.
             </p>
           </div>
           <div className="bg-white rounded-xl shadow p-6 flex flex-col items-center">
             <span className="text-3xl mb-2">👤</span>
-            <h2 className="font-bold text-lg mb-1">User Profiles</h2>
+            <h2 className="font-bold text-lg mb-1 text-gray-900">User Profiles</h2>
             <p className="text-gray-600 text-center text-sm">
               View user profiles and explore all the recipes they&apos;ve shared with the community.
             </p>
