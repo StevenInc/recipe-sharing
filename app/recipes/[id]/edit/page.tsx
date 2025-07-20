@@ -29,6 +29,8 @@ export default function EditRecipePage() {
     image_url: '',
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [draggedItem, setDraggedItem] = useState<{ type: 'ingredient' | 'instruction', index: number } | null>(null);
+  const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
   const router = useRouter();
   const params = useParams();
   const supabase = createClient();
@@ -88,6 +90,52 @@ export default function EditRecipePage() {
   const removeIngredient = (idx: number) => setForm(f => ({ ...f, ingredients: f.ingredients.filter((_, i) => i !== idx) }));
   const addInstruction = () => setForm(f => ({ ...f, instructions: [...f.instructions, ''] }));
   const removeInstruction = (idx: number) => setForm(f => ({ ...f, instructions: f.instructions.filter((_, i) => i !== idx) }));
+
+  // Drag and drop handlers
+  const handleDragStart = (e: React.DragEvent, type: 'ingredient' | 'instruction', index: number) => {
+    setDraggedItem({ type, index });
+    e.dataTransfer.effectAllowed = 'move';
+    e.currentTarget.style.opacity = '0.5';
+  };
+
+  const handleDragEnd = (e: React.DragEvent) => {
+    setDraggedItem(null);
+    setDragOverIndex(null);
+    e.currentTarget.style.opacity = '1';
+  };
+
+  const handleDragOver = (e: React.DragEvent, index: number) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    setDragOverIndex(index);
+  };
+
+  const handleDrop = (e: React.DragEvent, type: 'ingredient' | 'instruction', dropIndex: number) => {
+    e.preventDefault();
+    if (!draggedItem || draggedItem.type !== type) return;
+
+    const draggedIndex = draggedItem.index;
+    if (draggedIndex === dropIndex) return;
+
+    if (type === 'ingredient') {
+      setForm(f => {
+        const newIngredients = [...f.ingredients];
+        const [draggedItem] = newIngredients.splice(draggedIndex, 1);
+        newIngredients.splice(dropIndex, 0, draggedItem);
+        return { ...f, ingredients: newIngredients };
+      });
+    } else {
+      setForm(f => {
+        const newInstructions = [...f.instructions];
+        const [draggedItem] = newInstructions.splice(draggedIndex, 1);
+        newInstructions.splice(dropIndex, 0, draggedItem);
+        return { ...f, instructions: newInstructions };
+      });
+    }
+
+    setDraggedItem(null);
+    setDragOverIndex(null);
+  };
 
   const validate = () => {
     if (!form.title.trim()) return 'Title is required.';
@@ -168,7 +216,18 @@ export default function EditRecipePage() {
         <div>
           <label className="block font-semibold mb-1 text-gray-900">Ingredients</label>
           {form.ingredients.map((ing, idx) => (
-            <div key={idx} className="flex gap-2 mb-2">
+            <div
+              key={idx}
+              className={`flex gap-2 mb-2 items-center transition-all duration-200 ${
+                dragOverIndex === idx ? 'bg-orange-50 border-l-4 border-orange-400 pl-2' : ''
+              }`}
+              draggable
+              onDragStart={(e) => handleDragStart(e, 'ingredient', idx)}
+              onDragEnd={handleDragEnd}
+              onDragOver={(e) => handleDragOver(e, idx)}
+              onDrop={(e) => handleDrop(e, 'ingredient', idx)}
+            >
+              <div className="text-gray-400 text-sm mr-2 cursor-move select-none">⋮⋮</div>
               <input
                 className="flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
                 type="text"
@@ -195,7 +254,18 @@ export default function EditRecipePage() {
         <div>
           <label className="block font-semibold mb-1 text-gray-900">Instructions</label>
           {form.instructions.map((ins, idx) => (
-            <div key={idx} className="flex gap-2 mb-2">
+            <div
+              key={idx}
+              className={`flex gap-2 mb-2 items-center transition-all duration-200 ${
+                dragOverIndex === idx ? 'bg-orange-50 border-l-4 border-orange-400 pl-2' : ''
+              }`}
+              draggable
+              onDragStart={(e) => handleDragStart(e, 'instruction', idx)}
+              onDragEnd={handleDragEnd}
+              onDragOver={(e) => handleDragOver(e, idx)}
+              onDrop={(e) => handleDrop(e, 'instruction', idx)}
+            >
+              <div className="text-gray-400 text-sm mr-2 cursor-move select-none">⋮⋮</div>
               <input
                 className="flex-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
                 type="text"
