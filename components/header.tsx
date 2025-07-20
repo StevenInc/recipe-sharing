@@ -81,7 +81,12 @@ export default function Header() {
               <path d="M25 7l-4 11" stroke="#8D5524" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </span>
-          <span className="font-extrabold text-xl sm:text-2xl text-gray-900">RecipeShare</span>
+          <Link
+            href={isAuthenticated ? "/dashboard" : "/"}
+            className="font-extrabold text-xl sm:text-2xl text-gray-900 hover:text-orange-600 transition-colors"
+          >
+            RecipeShare
+          </Link>
         </div>
 
         {/* Desktop Navigation */}
