@@ -168,7 +168,9 @@ export default function AddRecipePage() {
             className="w-full p-2 border rounded"
             type="file"
             accept="image/*"
+            capture="environment"
             onChange={e => setImageFile(e.target.files?.[0] || null)}
+            multiple={false}
           />
         </div>
         {error && <div className="text-red-500 text-sm">{error}</div>}
