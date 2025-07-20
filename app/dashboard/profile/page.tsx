@@ -96,9 +96,9 @@ export default function ProfilePage() {
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded shadow max-w-md w-full space-y-4"
       >
-        <h2 className="text-2xl font-bold text-center mb-2">Edit Profile</h2>
+        <h2 className="text-2xl font-bold text-center mb-2 text-gray-900">Edit Profile</h2>
         <input
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
           type="email"
           name="email"
           placeholder="Email"
@@ -107,7 +107,7 @@ export default function ProfilePage() {
           required
         />
         <input
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
           type="text"
           name="username"
           placeholder="Username"
@@ -116,7 +116,7 @@ export default function ProfilePage() {
           required
         />
         <input
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
           type="text"
           name="full_name"
           placeholder="Full Name"
@@ -125,7 +125,7 @@ export default function ProfilePage() {
           required
         />
         <textarea
-          className="w-full p-2 border rounded min-h-[100px] resize-y"
+          className="w-full p-2 border border-gray-300 rounded min-h-[100px] resize-y focus:outline-none focus:ring-2 focus:ring-orange-300 text-gray-900 placeholder-gray-500"
           name="bio"
           placeholder="Bio"
           value={form.bio}
