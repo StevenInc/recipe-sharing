@@ -20,21 +20,13 @@ export default function HomePage() {
   }, [supabase.auth]);
 
   const handleBrowseRecipes = () => {
-    if (isAuthenticated) {
-      router.push('/dashboard');
-    } else {
-      router.push('/login');
-    }
+    router.push('/recipes');
   };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      if (isAuthenticated) {
-        router.push(`/dashboard?search=${encodeURIComponent(searchQuery.trim())}`);
-      } else {
-        router.push('/login');
-      }
+      router.push(`/recipes?search=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
 
@@ -112,7 +104,7 @@ export default function HomePage() {
               onClick={handleBrowseRecipes}
               className="w-full bg-gray-800 hover:bg-gray-900 text-white font-semibold py-2 px-4 rounded transition"
             >
-              {isAuthenticated ? 'Browse All Recipes' : 'Sign In to Browse'}
+              Browse All Recipes
             </button>
           </div>
         </section>

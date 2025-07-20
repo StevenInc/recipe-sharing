@@ -91,6 +91,9 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-4">
+          {/* Recipes link - visible to all users */}
+          <Link href="/recipes" className="text-gray-500 hover:text-gray-900 font-medium transition-colors">Recipes</Link>
+
           {isAuthenticated === null ? (
             // Loading state - show nothing while checking auth
             <div className="text-gray-400">Loading...</div>
@@ -144,6 +147,15 @@ export default function Header() {
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
           <div className="px-4 py-2 space-y-1">
+            {/* Recipes link - visible to all users */}
+            <Link
+              href="/recipes"
+              className="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+              onClick={closeMobileMenu}
+            >
+              Recipes
+            </Link>
+
             {isAuthenticated ? (
               <>
                 {pathname !== '/dashboard' && (
