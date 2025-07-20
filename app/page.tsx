@@ -14,7 +14,7 @@ export default function HomePage() {
             Discover, share, and create amazing recipes with a vibrant cooking community.
           </p>
           <a
-            href="#"
+            href="/login"
             className="inline-block bg-orange-600 hover:bg-orange-700 text-white font-semibold px-8 py-3 rounded-lg shadow transition mb-2"
           >
             Get Started
@@ -47,7 +47,7 @@ export default function HomePage() {
             <span className="text-3xl mb-2">👤</span>
             <h2 className="font-bold text-lg mb-1">User Profiles</h2>
             <p className="text-gray-600 text-center text-sm">
-              View user profiles and explore all the recipes they’ve shared with the community.
+              View user profiles and explore all the recipes they&apos;ve shared with the community.
             </p>
           </div>
         </section>
