@@ -43,6 +43,11 @@ export default function SupabaseStatusBadge({ refreshOnDashboard }: SupabaseStat
     return () => window.removeEventListener('supabase-badge-refresh', handler);
   }, []);
 
+  // Only show in development mode
+  if (process.env.NODE_ENV !== 'development') {
+    return null;
+  }
+
   let color = 'bg-yellow-400 text-yellow-900 border-yellow-500'
   let text = 'Loading…'
   if (status === 'success') {
