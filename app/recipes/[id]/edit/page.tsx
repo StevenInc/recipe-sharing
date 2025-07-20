@@ -31,6 +31,7 @@ export default function EditRecipePage() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [draggedItem, setDraggedItem] = useState<{ type: 'ingredient' | 'instruction', index: number } | null>(null);
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
+  const [dragOverType, setDragOverType] = useState<'ingredient' | 'instruction' | null>(null);
   const router = useRouter();
   const params = useParams();
   const supabase = createClient();
@@ -101,13 +102,15 @@ export default function EditRecipePage() {
   const handleDragEnd = (e: React.DragEvent) => {
     setDraggedItem(null);
     setDragOverIndex(null);
+    setDragOverType(null);
     (e.currentTarget as HTMLElement).style.opacity = '1';
   };
 
-  const handleDragOver = (e: React.DragEvent, index: number) => {
+  const handleDragOver = (e: React.DragEvent, type: 'ingredient' | 'instruction', index: number) => {
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
     setDragOverIndex(index);
+    setDragOverType(type);
   };
 
   const handleDrop = (e: React.DragEvent, type: 'ingredient' | 'instruction', dropIndex: number) => {
@@ -135,6 +138,7 @@ export default function EditRecipePage() {
 
     setDraggedItem(null);
     setDragOverIndex(null);
+    setDragOverType(null);
   };
 
   const validate = () => {
@@ -219,12 +223,12 @@ export default function EditRecipePage() {
             <div
               key={idx}
               className={`flex gap-2 mb-2 items-center transition-all duration-200 ${
-                dragOverIndex === idx ? 'bg-orange-50 border-l-4 border-orange-400 pl-2' : ''
+                dragOverIndex === idx && dragOverType === 'ingredient' ? 'bg-orange-50 border-l-4 border-orange-400 pl-2' : ''
               }`}
               draggable
               onDragStart={(e) => handleDragStart(e, 'ingredient', idx)}
               onDragEnd={handleDragEnd}
-              onDragOver={(e) => handleDragOver(e, idx)}
+              onDragOver={(e) => handleDragOver(e, 'ingredient', idx)}
               onDrop={(e) => handleDrop(e, 'ingredient', idx)}
             >
               <div className="text-gray-400 text-sm mr-2 cursor-move select-none">⋮⋮</div>
@@ -257,12 +261,12 @@ export default function EditRecipePage() {
             <div
               key={idx}
               className={`flex gap-2 mb-2 items-center transition-all duration-200 ${
-                dragOverIndex === idx ? 'bg-orange-50 border-l-4 border-orange-400 pl-2' : ''
+                dragOverIndex === idx && dragOverType === 'instruction' ? 'bg-orange-50 border-l-4 border-orange-400 pl-2' : ''
               }`}
               draggable
               onDragStart={(e) => handleDragStart(e, 'instruction', idx)}
               onDragEnd={handleDragEnd}
-              onDragOver={(e) => handleDragOver(e, idx)}
+              onDragOver={(e) => handleDragOver(e, 'instruction', idx)}
               onDrop={(e) => handleDrop(e, 'instruction', idx)}
             >
               <div className="text-gray-400 text-sm mr-2 cursor-move select-none">⋮⋮</div>
