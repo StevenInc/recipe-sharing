@@ -1,6 +1,43 @@
-import SupabaseStatusBadge from '@/components/supabase-status-badge'
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import SupabaseStatusBadge from '@/components/supabase-status-badge';
+import { createClient } from '@/lib/supabase/client';
 
 export default function HomePage() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
+  const supabase = createClient();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setIsAuthenticated(!!user);
+    };
+    checkAuth();
+  }, [supabase.auth]);
+
+  const handleBrowseRecipes = () => {
+    if (isAuthenticated) {
+      router.push('/dashboard');
+    } else {
+      router.push('/login');
+    }
+  };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      if (isAuthenticated) {
+        router.push(`/dashboard?search=${encodeURIComponent(searchQuery.trim())}`);
+      } else {
+        router.push('/login');
+      }
+    }
+  };
+
   return (
     <>
       <SupabaseStatusBadge />
@@ -51,17 +88,32 @@ export default function HomePage() {
             </p>
           </div>
         </section>
-        {/* Placeholder for Recipe Browsing/Search */}
+        {/* Recipe Browsing/Search */}
         <section className="w-full max-w-xl mb-24">
           <div className="bg-white/80 rounded-lg shadow p-6 flex flex-col items-center">
             <h3 className="font-semibold text-lg mb-2 text-gray-800">Browse Recipes</h3>
-            <input
-              type="text"
-              placeholder="Search recipes by title or ingredient..."
-              className="w-full p-2 border border-gray-300 rounded mb-2 focus:outline-none focus:ring-2 focus:ring-orange-300"
-              disabled
-            />
-            <p className="text-gray-400 text-sm">Recipe search and browsing coming soon!</p>
+            <form onSubmit={handleSearch} className="w-full mb-4">
+              <input
+                type="text"
+                placeholder="Search recipes by title or ingredient..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full p-2 border border-gray-300 rounded mb-2 focus:outline-none focus:ring-2 focus:ring-orange-300"
+              />
+              <button
+                type="submit"
+                disabled={!searchQuery.trim()}
+                className="w-full bg-orange-600 hover:bg-orange-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold py-2 px-4 rounded transition"
+              >
+                Search Recipes
+              </button>
+            </form>
+            <button
+              onClick={handleBrowseRecipes}
+              className="w-full bg-gray-800 hover:bg-gray-900 text-white font-semibold py-2 px-4 rounded transition"
+            >
+              {isAuthenticated ? 'Browse All Recipes' : 'Sign In to Browse'}
+            </button>
           </div>
         </section>
       </main>
