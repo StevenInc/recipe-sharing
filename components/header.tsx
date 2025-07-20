@@ -9,6 +9,7 @@ import { usePathname, useRouter } from 'next/navigation';
 export default function Header() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [authKey, setAuthKey] = useState(0); // Force re-render key
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -49,7 +50,12 @@ export default function Header() {
     const supabase = createClient();
     await supabase.auth.signOut();
     setIsAuthenticated(false);
+    setIsMobileMenuOpen(false);
     router.push('/');
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
   };
 
   console.log('Header render - isAuthenticated:', isAuthenticated, 'authKey:', authKey);
@@ -75,10 +81,11 @@ export default function Header() {
               <path d="M25 7l-4 11" stroke="#8D5524" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </span>
-          <span className="font-extrabold text-2xl text-gray-900">RecipeShare</span>
+          <span className="font-extrabold text-xl sm:text-2xl text-gray-900">RecipeShare</span>
         </div>
-        {/* Actions */}
-        <div className="flex items-center gap-4">
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-4">
           {isAuthenticated === null ? (
             // Loading state - show nothing while checking auth
             <div className="text-gray-400">Loading...</div>
@@ -108,7 +115,88 @@ export default function Header() {
             </>
           )}
         </div>
+
+        {/* Mobile Menu Button */}
+        {isAuthenticated !== null && (
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 text-gray-500 hover:text-gray-900 transition-colors"
+            type="button"
+            aria-label="Toggle mobile menu"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {isMobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+        )}
       </nav>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
+          <div className="px-4 py-2 space-y-1">
+            {isAuthenticated ? (
+              <>
+                {pathname !== '/dashboard' && (
+                  <Link
+                    href="/dashboard"
+                    className="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+                    onClick={closeMobileMenu}
+                  >
+                    Dashboard
+                  </Link>
+                )}
+                {pathname !== '/dashboard/favorites' && (
+                  <Link
+                    href="/dashboard/favorites"
+                    className="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+                    onClick={closeMobileMenu}
+                  >
+                    Favorites
+                  </Link>
+                )}
+                {pathname !== '/dashboard/profile' && (
+                  <Link
+                    href="/dashboard/profile"
+                    className="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+                    onClick={closeMobileMenu}
+                  >
+                    Profile
+                  </Link>
+                )}
+                <button
+                  onClick={handleLogout}
+                  className="block w-full text-left px-3 py-2 text-gray-700 hover:text-red-600 hover:bg-gray-50 rounded-md transition-colors"
+                  type="button"
+                >
+                  Log Out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+                  onClick={closeMobileMenu}
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/login?mode=signup"
+                  className="block px-3 py-2 bg-black text-white font-semibold rounded-md hover:bg-gray-800 transition-colors"
+                  onClick={closeMobileMenu}
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </header>
   );
 }

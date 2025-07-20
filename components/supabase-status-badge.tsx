@@ -54,7 +54,7 @@ export default function SupabaseStatusBadge({ refreshOnDashboard }: SupabaseStat
   }
 
   return (
-    <div className={`fixed top-4 right-4 z-50 px-3 py-1 rounded-full border text-sm font-semibold shadow ${color}`}
+    <div className={`fixed top-2 right-2 sm:top-4 sm:right-4 z-40 px-2 py-1 sm:px-3 sm:py-1 rounded-full border text-xs sm:text-sm font-semibold shadow ${color}`}
       title="Supabase user count status"
     >
       {text}
