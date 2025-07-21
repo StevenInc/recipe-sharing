@@ -97,63 +97,101 @@ export default function AddRecipePage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-200 py-12 px-4">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow max-w-lg w-full space-y-4">
-        <h2 className="text-2xl font-bold text-center mb-2">Add Recipe</h2>
-        <input
-          className="w-full p-2 border rounded"
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-          required
-        />
-        <textarea
-          className="w-full p-2 border rounded"
-          placeholder="Description"
-          value={description}
-          onChange={e => setDescription(e.target.value)}
-          required
-        />
+      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg max-w-lg w-full space-y-6">
+        <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">Add Recipe</h2>
+
         <div>
-          <label className="block font-semibold mb-1">Ingredients</label>
+          <label className="block text-sm font-semibold mb-2 text-gray-700">Title</label>
+          <input
+            className="w-full p-3 border border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            type="text"
+            placeholder="Enter recipe title"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold mb-2 text-gray-700">Description</label>
+          <textarea
+            className="w-full p-3 border border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
+            placeholder="Describe your recipe"
+            value={description}
+            onChange={e => setDescription(e.target.value)}
+            rows={3}
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold mb-2 text-gray-700">Ingredients</label>
           {ingredients.map((ing, idx) => (
             <div key={idx} className="flex gap-2 mb-2">
               <input
-                className="w-full p-2 border rounded"
+                className="flex-1 p-3 border border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 type="text"
+                placeholder={`Ingredient ${idx + 1}`}
                 value={ing}
                 onChange={e => handleIngredientChange(idx, e.target.value)}
                 required
               />
               {ingredients.length > 1 && (
-                <button type="button" onClick={() => removeIngredient(idx)} className="text-red-500">Remove</button>
+                <button
+                  type="button"
+                  onClick={() => removeIngredient(idx)}
+                  className="px-3 py-3 text-red-600 hover:text-red-800 font-medium"
+                >
+                  Remove
+                </button>
               )}
             </div>
           ))}
-          <button type="button" onClick={addIngredient} className="text-blue-600 underline">Add Ingredient</button>
+          <button
+            type="button"
+            onClick={addIngredient}
+            className="text-blue-600 hover:text-blue-800 font-medium text-sm"
+          >
+            + Add Ingredient
+          </button>
         </div>
+
         <div>
-          <label className="block font-semibold mb-1">Instructions</label>
+          <label className="block text-sm font-semibold mb-2 text-gray-700">Instructions</label>
           {instructions.map((ins, idx) => (
             <div key={idx} className="flex gap-2 mb-2">
               <input
-                className="w-full p-2 border rounded"
+                className="flex-1 p-3 border border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 type="text"
+                placeholder={`Step ${idx + 1}`}
                 value={ins}
                 onChange={e => handleInstructionChange(idx, e.target.value)}
                 required
               />
               {instructions.length > 1 && (
-                <button type="button" onClick={() => removeInstruction(idx)} className="text-red-500">Remove</button>
+                <button
+                  type="button"
+                  onClick={() => removeInstruction(idx)}
+                  className="px-3 py-3 text-red-600 hover:text-red-800 font-medium"
+                >
+                  Remove
+                </button>
               )}
             </div>
           ))}
-          <button type="button" onClick={addInstruction} className="text-blue-600 underline">Add Instruction</button>
+          <button
+            type="button"
+            onClick={addInstruction}
+            className="text-blue-600 hover:text-blue-800 font-medium text-sm"
+          >
+            + Add Instruction
+          </button>
         </div>
+
         <div>
-          <label className="block font-semibold mb-1">Category</label>
+          <label className="block text-sm font-semibold mb-2 text-gray-700">Category</label>
           <select
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border border-gray-300 rounded-md text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             value={category}
             onChange={e => setCategory(e.target.value)}
             required
@@ -163,12 +201,12 @@ export default function AddRecipePage() {
             ))}
           </select>
         </div>
-        <div>
-          <label className="block font-semibold mb-1">Image (optional)</label>
 
+        <div>
+          <label className="block text-sm font-semibold mb-2 text-gray-700">Image (optional)</label>
           <input
             ref={imageInputRef}
-            className="w-full p-2 border rounded"
+            className="w-full p-3 border border-gray-300 rounded-md text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             type="file"
             accept="image/*"
             capture="environment"
@@ -176,9 +214,15 @@ export default function AddRecipePage() {
             multiple={false}
           />
         </div>
-        {error && <div className="text-red-500 text-sm">{error}</div>}
+
+        {error && (
+          <div className="text-red-600 text-sm bg-red-50 p-3 rounded-md border border-red-200">
+            {error}
+          </div>
+        )}
+
         <button
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded transition"
+          className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
           type="submit"
           disabled={loading}
         >

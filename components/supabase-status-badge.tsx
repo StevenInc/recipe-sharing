@@ -43,7 +43,7 @@ export default function SupabaseStatusBadge({ refreshOnDashboard }: SupabaseStat
     return () => window.removeEventListener('supabase-badge-refresh', handler);
   }, []);
 
-  // Only show in development mode
+  // Only show inpm run buildn development mode
   if (process.env.NODE_ENV !== 'development') {
     return null;
   }
