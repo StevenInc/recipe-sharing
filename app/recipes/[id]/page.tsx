@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import RecipeEditLink from '@/components/recipe-edit-link';
 import LikeButton from '@/components/like-button';
 import CommentsSection from '@/components/comments-section';
@@ -46,7 +47,7 @@ export default async function RecipeDetailPage({ params }: RecipeDetailPageProps
           {recipe.category} &middot; {new Date(recipe.created_at).toLocaleDateString()}
           {uploader && (
             <>
-              {' '} &middot; Uploaded by <span className="font-semibold">{uploader.full_name || uploader.username}</span>
+              {' '} &middot; Uploaded by <Link href={`/profiles/${recipe.user_id}`} className="font-semibold text-orange-600 hover:text-orange-700 underline">{uploader.full_name || uploader.username}</Link>
             </>
           )}
         </div>

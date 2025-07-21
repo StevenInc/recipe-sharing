@@ -274,7 +274,7 @@ export default function FavoritesPage() {
                           {recipe.category}
                         </span>
                         <span>
-                          by {recipe.profiles?.full_name || recipe.profiles?.username || 'Anonymous'}
+                          by <Link href={`/profiles/${recipe.user_id}`} className="text-orange-600 hover:text-orange-700 underline">{recipe.profiles?.full_name || recipe.profiles?.username || 'Anonymous'}</Link>
                         </span>
                       </div>
                       <div className="flex items-center justify-between">

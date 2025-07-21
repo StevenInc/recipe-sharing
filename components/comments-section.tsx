@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import type { User } from '@supabase/supabase-js';
+import Link from 'next/link';
 
 interface Comment {
   id: string;
@@ -209,7 +210,9 @@ export default function CommentsSection({ recipeId }: CommentsSectionProps) {
               <div key={comment.id} className="bg-gray-50 p-4 rounded-lg relative">
                 <div className="flex items-center justify-between mb-2">
                   <span className="font-semibold text-sm">
-                    {comment.profiles?.full_name || comment.profiles?.username || 'Anonymous'}
+                    <Link href={`/profiles/${comment.user_id}`} className="text-orange-600 hover:text-orange-700 underline">
+                      {comment.profiles?.full_name || comment.profiles?.username || 'Anonymous'}
+                    </Link>
                   </span>
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-gray-500">
